@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+      <ion-title>Sign Up</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="registerForm">
+      <ion-list inset>
+          <ion-item>
+              <ion-label floating>Username</ion-label>
+              <ion-input type="text" formControlName="username">
+              </ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label floating>Email</ion-label>
+              <ion-input type="email" formControlName="email">
+              </ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label floating>Password</ion-label>
+              <ion-input type="password" formControlName="password">
+              </ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label floating>Confirm Password</ion-label>
+              <ion-input type="password" formControlName="confirmPassword">
+              </ion-input>
+          </ion-item>
+          
+      </ion-list>
+      <ion-grid>
+          <ion-row>
+              <ion-col>
+                  <button ion-button color="danger" (click)="onCancel()">
+                      Cancel
+                  </button>
+              </ion-col>
+              <ion-col>
+                  <button ion-button 
+                  color="secondary"
+                  [disabled]="!registerForm.valid" (click)="onSignUp()">
+                      Sign Up
+                  </button>
+              </ion-col>
+          </ion-row>
+      </ion-grid>
+  </form>
+
+</ion-content>

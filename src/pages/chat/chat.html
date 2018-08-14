@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      ASAB
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="OnGetPicture(input)">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- <ion-buttons end>
+      <button ion-button icon-only>
+          <ion-icon name="md-more"></ion-icon>
+      </button>
+    </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="messages">
+  <ion-list no-padding>
+    <ion-item no-lines style="background-color: transparent">
+      <ion-label>
+        <div>
+
+          <p>
+            <ion-avatar>
+              <img class="bot-image" src="https://png.icons8.com/ios/50/bot.png" />
+              <span class="bot-message-time">{{timeData | date: 'shortTime'}}</span>
+            </ion-avatar>
+            <span class="message-text left">Hi, I am ASAB bot.How may I help you?</span>
+          </p>
+        </div>
+
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list no-padding>
+    <div *ngFor="let mes of messages;let last = last">
+      <ion-item no-lines style="background-color: transparent">
+        <ion-label>
+
+          <p style="text-align: -webkit-right" *ngIf="mes.imgUrl === ''">
+
+            <ion-avatar>
+              <img class="user-image" src="https://png.icons8.com/ios/50/user.png" />
+              <span class="user-message-time">{{mes.createdAt | date: 'shortTime'}}</span>
+            </ion-avatar>
+            <span class="message-text right">{{mes.userMessage}}</span>
+
+          </p>
+          <p style="text-align: -webkit-right" *ngIf="mes.imgUrl !== ''">
+            <ion-avatar>
+              <img class="user-image" src="https://png.icons8.com/ios/50/user.png" />
+              <span class="user-message-time">{{mes.createdAt | date: 'shortTime'}}</span>
+            </ion-avatar>
+            <span class="message-text right">
+              <img src="{{mes.imgUrl}}" alt="">
+            </span>
+          </p>
+          <ion-avatar>
+            <img class="bot-image" src="https://png.icons8.com/ios/50/bot.png" />
+            <span class="bot-message-time">{{mes.createdAt | date: 'shortTime'}}</span>
+          </ion-avatar>
+
+          <p *ngFor="let botRes of mes.botMessages">
+            <!-- <ion-avatar>
+              <img class="bot-image" src="../../assets//imgs/botimage.png" />
+            </ion-avatar> -->
+            <span *ngIf="mes.botMessages.length > 0" class="message-text left">{{botRes}}</span>
+          </p>
+
+          {{last ? scrollToBottom() : ''}}
+
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar style="background: #f5f1ee " transparent>
+    <ion-row>
+      <ion-col col-8 style="background-color: ghostwhite">
+        <ion-input type="text" style="float:left" [(ngModel)]="query" #input></ion-input>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button icon-only color="secondary" style="float: right" (click)="GetBotResponse(query,input,'')">
+          <ion-icon ios="ios-send" name="send"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button color="secondary" icon-only style="float: right" (click)="StartListening(input)">
+          <ion-icon ios="ios-mic" md="md-mic"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+
+</ion-footer>
